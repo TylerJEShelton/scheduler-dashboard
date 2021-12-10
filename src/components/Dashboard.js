@@ -35,10 +35,9 @@ export default class Dashboard extends Component {
   };
 
   selectPanel(id) {
-    super();
-    this.setState({
-      focused: id,
-    });
+    this.setState(prevState => ({
+      focused: prevState.focused !== null ? null : id,
+    }));
   }
 
   render() {
@@ -57,10 +56,9 @@ export default class Dashboard extends Component {
       .map(panel => (
         <Panel
           key={panel.id}
-          id={panel.id}
           label={panel.label}
           value={panel.value}
-          onSelect={this.selectPanel}
+          onSelect={e => this.selectPanel(panel.id)}
         />
       ));
 
